@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:email_validator/email_validator.dart';
 
-const primaryColor = Color(0xff269ac5);
+const primaryColor = Color(0xFF26A69A);
 const secondaryColor = Color(0xFF707070);
 
 class personalDetail extends StatefulWidget {
@@ -28,9 +30,10 @@ class _personalDetailState extends State<personalDetail> {
       });
     }
   }
+
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registration Page'),
@@ -39,105 +42,126 @@ class _personalDetailState extends State<personalDetail> {
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Form(
-            key: _myFormKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter name';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    icon: const Icon(Icons.person),
-                    labelText: 'Name',
-                    hintText: 'Enter your full name',
-                    labelStyle: TextStyle(color: secondaryColor),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: primaryColor),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: secondaryColor),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    icon: const Icon(Icons.email),
-                    labelText: 'Email',
-                    hintText: 'Enter your email address',
-                    labelStyle: TextStyle(color: secondaryColor),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: primaryColor),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: secondaryColor),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _myFormKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter name';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.person),
+                      prefixIconColor: primaryColor,
+                      labelText: 'Name',
+                      hintText: 'Enter your full name',
+                      labelStyle: TextStyle(
+                          color: secondaryColor, fontWeight: FontWeight.bold),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: secondaryColor),
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your mobile number';
-                    }
-                    if (value.length < 10) {
-                      return 'Please enter a valid phone number';
-                    }
-                  },
-                  keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
-                    icon: const Icon(Icons.phone),
-                    labelText: 'Mobile Number',
-                    labelStyle: TextStyle(color: secondaryColor),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: primaryColor),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: secondaryColor),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: _dobController,
-                  readOnly: true,
-                  onTap: () => _selectDate(context),
-                  decoration: InputDecoration(
-                    icon: const Icon(Icons.calendar_today),
-                    labelText: 'DOB',
-                    hintText: 'Select your date of birth',
-                    labelStyle: TextStyle(color: secondaryColor),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: primaryColor),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: secondaryColor),
+                  const SizedBox(height: 15),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter an email address';
+                      }
+                      return EmailValidator.validate(value) ? null : 'Please enter a valid email';
+                    },
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.email),
+                      prefixIconColor: primaryColor,
+                      labelText: 'Email',
+                      hintText: 'Enter your email address',
+                      labelStyle: TextStyle(
+                          color: secondaryColor, fontWeight: FontWeight.bold),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: secondaryColor),
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    _myFormKey.currentState?.validate();
-                    Navigator.pushNamed(context, '/Second');
-                  },
-                  child: const Text(
-                    'Next',
-                    style: TextStyle(
-                        color: secondaryColor, fontWeight: FontWeight.bold),
+                  const SizedBox(height: 15),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your mobile number';
+                      }
+                      if (value.length != 10 ) {
+                        return 'Please enter a valid phone number';
+                      }
+                    },
+                    keyboardType: TextInputType.phone,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.phone),
+                      prefixIconColor: primaryColor,
+                      labelText: 'Mobile Number',
+                      labelStyle: TextStyle(color: secondaryColor, fontWeight: FontWeight.bold),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: secondaryColor),
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                    ),
                   ),
-                  style: ElevatedButton.styleFrom(
-                    primary: primaryColor,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 15),
+                  const SizedBox(height: 15),
+                  TextFormField(
+                    controller: _dobController,
+                    readOnly: true,
+                    onTap: () => _selectDate(context),
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.calendar_today),
+                      prefixIconColor: primaryColor,
+                      labelText: 'DOB',
+                      hintText: 'Select your date of birth',
+                      labelStyle: TextStyle(
+                          color: secondaryColor, fontWeight: FontWeight.bold),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: secondaryColor),
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_myFormKey.currentState?.validate() == true) {
+                        Navigator.pushNamed(context, '/Second');
+                      }
+                    },
+                    child: const Text(
+                      'Next',
+                      style: TextStyle(
+                          color: Colors.black54, fontWeight: FontWeight.bold),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: primaryColor,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 50, vertical: 15),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
