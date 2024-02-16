@@ -159,6 +159,12 @@ class _CompanyDetailState extends State<CompanyDetail> with AutomaticKeepAliveCl
                     const SizedBox(height: 10),
                     TextFormField(
                       controller: companyAddressController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter company\'s address';
+                        }
+                        return null;
+                      },
                       decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.business),
                         prefixIconColor: primaryColor,
@@ -210,6 +216,15 @@ class _CompanyDetailState extends State<CompanyDetail> with AutomaticKeepAliveCl
                     const SizedBox(height: 10),
                     TextFormField(
                       controller: zipCodeController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your company\'s zip code';
+                        }
+                        if (value.length != 6) {
+                          return 'Please enter a valid zip code';
+                        }
+                        return null;
+                      },
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: InputDecoration(
