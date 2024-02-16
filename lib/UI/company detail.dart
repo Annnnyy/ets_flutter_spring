@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ets_flutter_spring/personal detail.dart';
+import 'package:ets_flutter_spring/UI/personal%20detail.dart';
 import 'package:csc_picker/csc_picker.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/services.dart';
@@ -251,6 +251,7 @@ class _CompanyDetailState extends State<CompanyDetail> with AutomaticKeepAliveCl
                             // Handle exceptions or errors here
                             print(e);
                           }
+                          DefaultTabController.of(context).animateTo(2);
                         } },
                       child: const Text('Next',
                           style: TextStyle(

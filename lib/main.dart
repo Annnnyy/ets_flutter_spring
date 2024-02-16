@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'personal detail.dart';
-import 'company detail.dart';
+import 'UI/personal detail.dart';
+import 'UI/company detail.dart';
+import 'UI/confirm registration.dart';
 
 void main() => runApp(formApp());
 
@@ -20,7 +21,7 @@ class formApp extends StatelessWidget {
                 Tab(icon: Icon(Icons.settings)),
               ],
             ),
-            title: const Text('Registration Form'),
+            title: const Text('Registration Form',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white70),),
             backgroundColor: primaryColor,
           ),
           body: TabBarView(
@@ -28,7 +29,7 @@ class formApp extends StatelessWidget {
             children: [
               PersonalDetail(),
               CompanyDetail(),
-              Container(child: Icon(Icons.settings)),
+              ConfirmRegistration(),
             ],
           ),
         ),

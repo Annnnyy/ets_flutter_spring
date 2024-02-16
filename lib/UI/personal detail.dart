@@ -1,4 +1,3 @@
-import 'package:ets_flutter_spring/company%20detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:email_validator/email_validator.dart';
@@ -12,7 +11,7 @@ class PersonalDetail extends StatefulWidget {
 }
 
 class _PersonalDetailState extends State<PersonalDetail> with AutomaticKeepAliveClientMixin {
-  var _myFormKey = GlobalKey<FormState>();
+  final _myFormKey = GlobalKey<FormState>();
   TextEditingController _dobController = TextEditingController();
   DateTime? _selectedDate;
 
@@ -38,9 +37,10 @@ class _PersonalDetailState extends State<PersonalDetail> with AutomaticKeepAlive
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.fromLTRB(0, 10 , 0, 0),
+        margin: const EdgeInsets.fromLTRB(0, 10 , 0, 0),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
