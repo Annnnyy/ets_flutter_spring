@@ -5,12 +5,12 @@ import 'package:email_validator/email_validator.dart';
 const primaryColor = Color(0xFF26A69A);
 const secondaryColor = Color(0xFF707070);
 
-class PersonalDetail extends StatefulWidget {
+class personalDetail extends StatefulWidget {
   @override
-  State<PersonalDetail> createState() => _PersonalDetailState();
+  State<personalDetail> createState() => _personalDetailState();
 }
 
-class _PersonalDetailState extends State<PersonalDetail> {
+class _personalDetailState extends State<personalDetail> {
   var _myFormKey = GlobalKey<FormState>();
   TextEditingController _dobController = TextEditingController();
   DateTime? _selectedDate;
@@ -59,13 +59,13 @@ class _PersonalDetailState extends State<PersonalDetail> {
                       prefixIconColor: primaryColor,
                       labelText: 'Name',
                       hintText: 'Enter your full name',
-                      labelStyle: const TextStyle(
+                      labelStyle: TextStyle(
                           color: secondaryColor, fontWeight: FontWeight.bold),
-                      focusedBorder: const OutlineInputBorder(
+                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: primaryColor),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: secondaryColor),
+                        borderSide: BorderSide(color: secondaryColor),
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                     ),
@@ -84,13 +84,13 @@ class _PersonalDetailState extends State<PersonalDetail> {
                       prefixIconColor: primaryColor,
                       labelText: 'Email',
                       hintText: 'Enter your email address',
-                      labelStyle: const TextStyle(
+                      labelStyle: TextStyle(
                           color: secondaryColor, fontWeight: FontWeight.bold),
-                      focusedBorder: const OutlineInputBorder(
+                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: primaryColor),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: secondaryColor),
+                        borderSide: BorderSide(color: secondaryColor),
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                     ),
@@ -104,20 +104,19 @@ class _PersonalDetailState extends State<PersonalDetail> {
                       if (value.length != 10 ) {
                         return 'Please enter a valid phone number';
                       }
-                      return null;
                     },
                     keyboardType: TextInputType.phone,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.phone),
+                      prefixIcon: Icon(Icons.phone),
                       prefixIconColor: primaryColor,
                       labelText: 'Mobile Number',
-                      labelStyle: const TextStyle(color: secondaryColor, fontWeight: FontWeight.bold),
-                      focusedBorder: const OutlineInputBorder(
+                      labelStyle: TextStyle(color: secondaryColor, fontWeight: FontWeight.bold),
+                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: primaryColor),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: secondaryColor),
+                        borderSide: BorderSide(color: secondaryColor),
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                     ),
@@ -132,13 +131,13 @@ class _PersonalDetailState extends State<PersonalDetail> {
                       prefixIconColor: primaryColor,
                       labelText: 'DOB',
                       hintText: 'Select your date of birth',
-                      labelStyle: const TextStyle(
+                      labelStyle: TextStyle(
                           color: secondaryColor, fontWeight: FontWeight.bold),
-                      focusedBorder: const OutlineInputBorder(
+                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: primaryColor),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: secondaryColor),
+                        borderSide: BorderSide(color: secondaryColor),
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                     ),
@@ -156,7 +155,7 @@ class _PersonalDetailState extends State<PersonalDetail> {
                           color: Colors.black54, fontWeight: FontWeight.bold),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
+                      primary: primaryColor,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 50, vertical: 15),
                     ),
