@@ -1,3 +1,4 @@
+import 'package:ets_flutter_spring/company%20detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:email_validator/email_validator.dart';
@@ -10,10 +11,13 @@ class PersonalDetail extends StatefulWidget {
   State<PersonalDetail> createState() => _PersonalDetailState();
 }
 
-class _PersonalDetailState extends State<PersonalDetail> {
+class _PersonalDetailState extends State<PersonalDetail> with AutomaticKeepAliveClientMixin {
   var _myFormKey = GlobalKey<FormState>();
   TextEditingController _dobController = TextEditingController();
   DateTime? _selectedDate;
+
+  @override
+  bool get wantKeepAlive => true;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -35,11 +39,8 @@ class _PersonalDetailState extends State<PersonalDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Registration Page'),
-        backgroundColor: primaryColor,
-      ),
       body: Container(
+        margin: EdgeInsets.fromLTRB(0, 10 , 0, 0),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
@@ -66,7 +67,7 @@ class _PersonalDetailState extends State<PersonalDetail> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: secondaryColor),
-                        borderRadius: BorderRadius.circular(50.0),
+                        borderRadius: BorderRadius.circular(15.0),
                       ),
                     ),
                   ),
@@ -91,7 +92,7 @@ class _PersonalDetailState extends State<PersonalDetail> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: secondaryColor),
-                        borderRadius: BorderRadius.circular(50.0),
+                        borderRadius: BorderRadius.circular(15.0),
                       ),
                     ),
                   ),
@@ -118,7 +119,7 @@ class _PersonalDetailState extends State<PersonalDetail> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: secondaryColor),
-                        borderRadius: BorderRadius.circular(50.0),
+                        borderRadius: BorderRadius.circular(15.0),
                       ),
                     ),
                   ),
@@ -139,7 +140,7 @@ class _PersonalDetailState extends State<PersonalDetail> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: secondaryColor),
-                        borderRadius: BorderRadius.circular(50.0),
+                        borderRadius: BorderRadius.circular(15.0),
                       ),
                     ),
                   ),
@@ -147,13 +148,13 @@ class _PersonalDetailState extends State<PersonalDetail> {
                   ElevatedButton(
                     onPressed: () {
                       if (_myFormKey.currentState?.validate() == true) {
-                        Navigator.pushNamed(context, '/Second');
-                      }
+                        DefaultTabController.of(context).animateTo(1);
+                            }
                     },
                     child: const Text(
                       'Next',
                       style: TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.bold),
+                          color: Colors.white70, fontWeight: FontWeight.bold),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,

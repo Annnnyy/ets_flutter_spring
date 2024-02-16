@@ -3,24 +3,42 @@ import 'package:ets_flutter_spring/personal detail.dart';
 import 'package:csc_picker/csc_picker.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/services.dart';
+import 'package:ets_flutter_spring/entities/api_service.dart';
 
 class CompanyDetail extends StatefulWidget {
   @override
   State<CompanyDetail> createState() => _CompanyDetailState();
 }
 
-class _CompanyDetailState extends State<CompanyDetail> {
-  var _myFormKey = GlobalKey<FormState>();
+class _CompanyDetailState extends State<CompanyDetail> with AutomaticKeepAliveClientMixin{
+  final _myFormKey = GlobalKey<FormState>();
+
+  TextEditingController companyNameController = TextEditingController();
+  TextEditingController companyPhoneController = TextEditingController();
+  TextEditingController companyEmailController = TextEditingController();
+  TextEditingController designationController = TextEditingController();
+  TextEditingController companyAddressController = TextEditingController();
+  TextEditingController zipCodeController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
+
+
+  @override
+  bool get wantKeepAlive => true;
+
   String countryValue = "";
   String stateValue = "";
   String cityValue = "";
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    String companyName = companyNameController.text;
+    String companyPhone= companyPhoneController.text;
+    String companyEmail= companyEmailController.text;
+    String companyDesignation= designationController.text;
+    String companyAddress= companyAddressController.text;
+    String zipCode= zipCodeController.text;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Registration Page'),
-        backgroundColor: primaryColor,
-      ),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -36,6 +54,7 @@ class _CompanyDetailState extends State<CompanyDetail> {
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: companyNameController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter company\'s name';
@@ -53,12 +72,13 @@ class _CompanyDetailState extends State<CompanyDetail> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: secondaryColor),
-                          borderRadius: BorderRadius.circular(50.0),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                       ),
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
+                      controller: companyPhoneController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your company\'s mobile number';
@@ -80,12 +100,13 @@ class _CompanyDetailState extends State<CompanyDetail> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: secondaryColor),
-                          borderRadius: BorderRadius.circular(50.0),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                       ),
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
+                      controller: companyEmailController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter an email address';
@@ -107,12 +128,13 @@ class _CompanyDetailState extends State<CompanyDetail> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: secondaryColor),
-                          borderRadius: BorderRadius.circular(50.0),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                       ),
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
+                      controller: designationController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your designation';
@@ -130,12 +152,13 @@ class _CompanyDetailState extends State<CompanyDetail> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: secondaryColor),
-                          borderRadius: BorderRadius.circular(50.0),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                       ),
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
+                      controller: companyAddressController,
                       decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.business),
                         prefixIconColor: primaryColor,
@@ -147,7 +170,7 @@ class _CompanyDetailState extends State<CompanyDetail> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: secondaryColor),
-                          borderRadius: BorderRadius.circular(50.0),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                       ),
                     ),
@@ -163,17 +186,30 @@ class _CompanyDetailState extends State<CompanyDetail> {
                       countryDropdownLabel: "Country",
                       stateDropdownLabel: "State",
                       cityDropdownLabel: "City",
-                      onCountryChanged: (country) {},
-                      onStateChanged: (state) {},
-                      onCityChanged: (city) {},
+                      onCountryChanged: (country) {
+                        setState(() {
+                          countryValue = country ?? "";
+                        });
+                      },
+                      onStateChanged: (state) {
+                        setState(() {
+                          stateValue = state ?? "";
+                        });
+                      },
+                      onCityChanged: (city) {
+                        setState(() {
+                          cityValue = city ?? "";
+                        });
+                      },
                       dropdownDecoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(50)),
+                        borderRadius: const BorderRadius.all(Radius.circular(15)),
                         color: Colors.white,
                         border: Border.all(color: secondaryColor, width: 1.5),
                       ),
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
+                      controller: zipCodeController,
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: InputDecoration(
@@ -187,18 +223,38 @@ class _CompanyDetailState extends State<CompanyDetail> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: secondaryColor),
-                          borderRadius: BorderRadius.circular(50.0),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                       ),
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: () {
-                        _myFormKey.currentState?.validate();
-                      },
-                      child: const Text('Submit',
+                      onPressed: () async {
+                        if(_myFormKey.currentState?.validate() == true) {
+                          try {
+                            final response = await ApiService
+                                .registerOrganization(
+                              companyName: companyNameController.text,
+                              companyPhone: companyPhoneController.text,
+                              companyEmail: companyEmailController.text,
+                              companyDesignation: designationController.text,
+                              companyAddress: companyAddressController.text,
+                              zipCode: zipCodeController.text,
+                              country: countryValue,
+                              state: stateValue,
+                              city: cityValue,
+                            );
+
+                            // Handle the response here
+                            print(response);
+                          } catch (e) {
+                            // Handle exceptions or errors here
+                            print(e);
+                          }
+                        } },
+                      child: const Text('Next',
                           style: TextStyle(
-                              color: secondaryColor,
+                              color: Colors.white70,
                               fontWeight: FontWeight.bold)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryColor,
