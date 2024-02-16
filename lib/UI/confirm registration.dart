@@ -52,8 +52,6 @@ class _ConfirmRegistrationState extends State<ConfirmRegistration> {
   }
 
   void _handleSubmitButton() {
-    // Implement the logic for handling the submit button click
-    // This could include navigating to a new screen, showing a dialog, etc.
     print('Submit button clicked.');
 
     // Show a success dialog
