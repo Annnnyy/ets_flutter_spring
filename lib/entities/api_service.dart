@@ -46,13 +46,13 @@ class ApiService {
         print("Response data: $responseData");
         return responseData;
       } else {
-        // Handle error cases, you may throw an exception or return an error map
+        // Handle error cases
         print("API Call failed with status code: ${response.statusCode}");
         print("Response body: ${response.body}");
         throw Exception("API Call failed");
       }
     } catch (e) {
-      // Handle exceptions, you may throw an exception or return an error map
+      // Handle exceptions
       print("Exception during API call: $e");
       throw Exception("API Call failed");
     }

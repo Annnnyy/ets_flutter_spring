@@ -245,10 +245,10 @@ class _CompanyDetailState extends State<CompanyDetail> with AutomaticKeepAliveCl
                               city: cityValue,
                             );
 
-                            // Handle the response here
+
                             print(response);
                           } catch (e) {
-                            // Handle exceptions or errors here
+
                             print(e);
                           }
                           DefaultTabController.of(context).animateTo(2);
