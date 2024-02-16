@@ -14,8 +14,8 @@ class formApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => personalDetail(),
-        '/Second':(context) => companyDetail(),
+        '/': (context) => PersonalDetail(),
+        '/Second':(context) => CompanyDetail(),
       },
     );
   }
